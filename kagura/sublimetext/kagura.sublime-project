@@ -1,0 +1,135 @@
+// References:
+// http://www.sublimetext.com/docs/2/projects.html
+// http://docs.sublimetext.info/en/latest/reference/build_systems.html
+{
+	"folders":
+	[
+		{
+			"name" : "Project",
+			"path": ".",
+			"folder_exclude_patterns": ["*"],
+			"file_include_patterns": [ "*.lua", ".git*", "*.sublime-project" ],
+			"file_exclude_patterns": ["*~"]
+		},
+		{
+			"path": "Documentation",
+			"folder_exclude_patterns": ["*"],
+			"file_exclude_patterns": ["*~"],
+			"file_include_patterns": ["*.ad"]
+		},
+		{
+			"name" : "Streams",
+			"path": "data/Streams",
+			"folder_exclude_patterns": ["data/Streams/*"],
+			"file_include_patterns": ["*.lua"]
+		},
+		{
+			"path": "shaders",
+			"file_exclude_patterns": ["*~"]
+		},
+		{
+			"path": "scripts",
+			"file_exclude_patterns": ["*~"]
+		},
+		{
+			"path": "src",
+			"file_exclude_patterns": ["*~"]
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "kagura3d",
+			"working_dir": "${project_path}/build/",
+			"cmd": [ 
+				"make", "-j8", 
+				"CXX=/usr/bin/clang++",
+				"CC=/usr/bin/clang", 
+				"config=debug",
+				"-f",
+				"kagura3d.make"
+			],
+			"file_regex": "^ *(.+):([0-9]+):([0-9]+):",
+			"variants":	[ 
+				{
+					"name": "Run",
+					"cmd": [ "bin/kagura3d.elf" ],
+					"working_dir": "${project_path}/"
+				},
+				{
+					"name": "Debug",
+					"cmd": [ "nemiver", "bin/kagura3d.elf" ],
+					"working_dir": "${project_path}/"
+				},
+				{
+					"name": "kagura3d, Debug x86-64",
+					"cmd": [ 
+						"make", "-j8", 
+						"CXX=/usr/bin/clang++",
+						"CC=/usr/bin/clang", 
+						"config=debug",
+						"-f",
+						"kagura3d.make"
+					]
+				},
+				{
+					"name": "kagura3d, Release x86-64",
+					"cmd": [ 
+						"make", "-j8", 
+						"CXX=/usr/bin/clang++",
+						"CC=/usr/bin/clang", 
+						"config=release",
+						"-f",
+						"kagura3d.make"
+					]
+				},
+				{
+					"name": "kagura3d, Clang Analyzer",
+					"cmd": [ 
+						"make", "-j8", 
+						"CXX=/usr/share/clang/scan-build/c++-analyzer",
+						"CC=/usr/share/clang/scan-build/ccc-analyzer", 
+						"config=debug",
+						"-f",
+						"kagura3d.make"
+					]
+				}
+			]
+		},
+		{
+			"name": "kagura3d, unit tests",
+			"file_regex": "^ *(.+):([0-9]+):([0-9]+):",
+			"working_dir": "${project_path}/build/",
+			"cmd": [ 
+				"make", "-j8", 
+				"CXX=/usr/bin/clang++",
+				"CC=/usr/bin/clang", 
+				"config=release",
+				"-f",
+				"kagura3d-tests.make"
+			],
+			"variants":	[ { "name": "Run", "cmd": [ "bin/KaUnitTests" ], "working_dir": "${project_path}/" } ]
+		},
+		{
+			"name": "UnitTest, KaJsonParser",
+			"file_regex": "^ *(.+):([0-9]+):([0-9]+):",
+			"working_dir": "${project_path}/build/",
+			"cmd": [ "make", "CXX=/usr/bin/clang++","CC=/usr/bin/clang", "config=debug", "KaJsonParserUnitTest" ],
+			"variants":	[ { "name": "Run", "cmd": [ "bin/KaJsonParserUnitTest" ], "working_dir": "${project_path}/" } ]
+		},
+		{
+			"name": "UnitTest, KaShaderParser",
+			"file_regex": "^ *(.+):([0-9]+):([0-9]+):",
+			"working_dir": "${project_path}/build/",
+			"cmd": [ "make", "CXX=/usr/bin/clang++","CC=/usr/bin/clang", "config=debug", "KaShaderParserUnitTest" ],
+			"variants":	[ { "name": "Run", "cmd": [ "bin/KaShaderParserUnitTest", "shaders/Opaque/Base.shader" ], "working_dir": "${project_path}/" } ]
+		},		
+		{
+			"name": "UnitTest, ObjParser",
+			"file_regex": "^ *(.+):([0-9]+):([0-9]+):",
+			"working_dir": "${project_path}/build/",
+			"cmd": [ "make", "CXX=/usr/bin/clang++","CC=/usr/bin/clang", "config=debug", "ObjParserUnitTest" ],
+			"variants":	[ { "name": "Run", "cmd": [ "bin/ObjParserUnitTest" ], "working_dir": "${project_path}/" } ]
+		}
+	]
+}
