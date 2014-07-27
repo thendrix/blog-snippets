@@ -1,0 +1,84 @@
+[
+	{
+		"caption" : "Kagura",
+		"mnemonic" : "K",
+		"id": "kagura",
+		"children":
+		[
+			{
+				"caption" : "Tools",
+				"mnemonic" : "T",
+				"id": "kagura-tools",
+				"children":
+				[
+					{
+						"caption" : "ApiTrace",
+						"mnemonic" : "A",
+						"command" : "kagura_shell",
+						"args" : { 
+							"args" : "../External/apitrace/apitrace trace --api=gl bin/kagura3d.elf&" 
+						}
+					},
+					{
+						"caption" : "Vogl",
+						"mnemonic" : "V",
+						"command" : "kagura_shell",
+						"args" : { 
+							"args" : "vogleditor64"
+						}
+					},
+					{
+						"caption" : "Debug",
+						"mnemonic" : "D",
+						"command" : "kagura_shell",
+						"args" : { 
+							"args" : "nemiver bin/kagura3d.elf"
+						}
+					},
+					{
+						"caption" : "Terminal",
+						"mnemonic" : "T",
+						"command" : "gnome_terminal",
+						"args" : { }
+					},
+					{
+						"caption" : "Source Control",
+						"mnemonic" : "C",
+						"command" : "git_gui",
+						"args" : { }
+					},
+					{
+						"caption" : "File History",
+						"mnemonic" : "H",
+						"command" : "gitk",
+						"args" : { }
+					},
+					{
+						"caption" : "LAN IP",
+						"mnemonic" : "I",
+						"command" : "kagura_lan_ip",
+						"args" : { "args" : "" }
+					}
+				]
+			},
+			{
+				"caption" : "Script Reload",
+				"mnemonic" : "c",
+				"command" : "kagura_reload_script",
+				"args" : { }
+			},
+			{
+				"caption" : "Shader Reload",
+				"mnemonic" : "h",
+				"command" : "kagura_reload_shader",
+				"args" : { }
+			},
+			{
+				"caption" : "Engine Shutdown",
+				"mnemonic" : "S",
+				"command" : "kagura_rpc",
+				"args" : { "args" : "KaEngine.Shutdown()" }
+			}
+		]
+	}
+]

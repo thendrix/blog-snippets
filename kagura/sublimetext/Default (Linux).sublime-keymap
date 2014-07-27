@@ -1,0 +1,13 @@
+[
+	{ "keys": ["f5"], "command": "build", "args": {"variant": "Run"} },
+	{ "keys": ["shift+f5"], "command": "build", "args": {"variant": "Debug"} },
+	{ "keys": ["super+a"], "command": "asciidoc_browser" },
+	{ "keys": ["alt+ctrl+c"], "command": "git_gui" },
+	{ "keys": ["alt+ctrl+h"], "command": "gitk" },
+	{ "keys": ["alt+ctrl+r"], "command": "kagura_script_reload_shader" },
+	{ "keys": ["f8"], "command": "kagura_script_reload_shader" },
+	{ "keys": ["f9"], "command": "kagura_script" },
+	// { "keys": ["f6"], "command": "show_panel", "args": {"panel": "output.find_results"} },
+	{ "keys" : [ "ctrl+shift+b" ], "command" : "show_panel", "args" : { "panel": "output.exec" } },
+	{ "keys": ["ctrl+alt+b"], "command": "show_overlay", "args": {"overlay": "command_palette", "text": "Build: "} }
+]
